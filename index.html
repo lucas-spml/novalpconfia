@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conf.IA — Monuv</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080F26;
+      --primary: #00BDFF;
+      --accent: #EA288B;
+      --warm: #FF8955;
+      --text: #E6F2FF;
+      --muted: #9FB3C8;
+      --card: #0D1736;
+      --stroke: #1C2B57;
+      --success: #22c55e;
+      --warning: #eab308;
+      --danger: #ef4444;
+    }
+
+    html,
+    body {
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(255, 0, 200, 0.2), transparent 60%),
+        radial-gradient(900px 600px at -10% 20%, rgba(234, 40, 139, .2), transparent 60%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(8, 15, 38, .75), rgba(8, 15, 38, .55));
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .btn-primary {
+      --bs-btn-bg: var(--accent);
+      --bs-btn-border-color: var(--accent);
+      --bs-btn-hover-bg: #cc0468;
+      --bs-btn-hover-border-color: #ca0578;
+      --bs-btn-color: #fff;
+      --bs-btn-hover-color: #021018;
+      box-shadow: 0 0 0 .1rem rgba(137, 25, 83, 0.288), 0 10px 24px rgba(255, 0, 179, 0.25);
+    }
+
+    .btn-outline-light {
+      --bs-btn-hover-bg: rgba(230, 242, 255, 0.514);
+      --bs-btn-hover-border-color: var(--text);
+      color: var(--text);
+      border-color: var(--stroke);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem .6rem;
+      font-size: .8rem;
+      border-radius: 999px;
+      color: #cfe9ff;
+      background: rgba(0, 189, 255, .12);
+      border: 1px solid rgba(0, 189, 255, .25);
+    }
+
+    .glow {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .glow::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      border-radius: 1.2rem;
+      background: radial-gradient(60% 120% at 20% 0%, rgba(0, 189, 255, .25), transparent 60%),
+        radial-gradient(80% 100% at 100% 100%, rgba(233, 7, 124, 0.22), transparent 100%),
+        linear-gradient(180deg, rgba(255, 137, 85, .18), transparent 60%);
+      filter: blur(24px);
+      opacity: .85;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(13, 23, 54, .9), rgba(13, 23, 54, .7));
+      border: 1px solid var(--stroke);
+      border-radius: 1.2rem;
+      color: var(--text);
+    }
+
+    .hero {
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+      background:
+        radial-gradient(1000px 500px at 70% 0%, rgba(234, 40, 139, .14), transparent 60%),
+        radial-gradient(800px 500px at 0% 40%, rgba(234, 40, 139, .14), transparent 60%);
+    }
+
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 20%;
+      width: 25%;
+      height: 25%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      overflow: visible;
+      background: transparent !important;
+      border: none;
+      box-shadow: none;
+      animation: none;
+    }
+
+    .hero-visual .ring,
+    .hero-visual .r2 {
+      display: none !important;
+    }
+
+    .hero-icon {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 24px rgba(234, 40, 139, .16)) drop-shadow(0 0 40px rgba(234, 40, 139, .22));
+      animation: iconFloat 6s ease-in-out infinite;
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes iconFloat {
+
+      0%,
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.06) translateY(-2px);
+        opacity: .98;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-visual.glow {
+        display: block;
+        max-width: 260px;
+        margin: 0 auto;
+      }
+    }
+
+
+
+
+
+
+    /* Animações */
+    @keyframes lensBreath {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    @keyframes corePulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.4);
+        opacity: 0.5;
+      }
+    }
+
+    /* Troca gradual entre azul e rosa */
+    @keyframes colorShift {
+
+      0%,
+      100% {
+        --pulse-color: #00bdfd;
+      }
+
+      50% {
+        --pulse-color: #EA288B;
+      }
+    }
+
+
+    .ring {
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      border: 4px solid rgba(234, 40, 140, 0.37);
+      box-shadow: 0 0 60px rgba(234, 40, 139, .35) inset;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .9
+      }
+
+      50% {
+        transform: scale(1.04);
+        opacity: .65
+      }
+    }
+
+
+
+
+
+
+
+
+    .section-title {
+      letter-spacing: .4px
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .badge-trust {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid rgba(34, 197, 94, .35);
+      background: linear-gradient(180deg, rgba(34, 197, 94, .12), rgba(34, 197, 94, .08));
+      color: #b9f6c6;
+      padding: .5rem .75rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .list-check li {
+      margin-bottom: .9rem;
+    }
+
+    .list-check .bi {
+      color: var(--accent);
+    }
+
+    .pricing .card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .pricing .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+    }
+
+    .table-dark.table-hover tbody tr:hover {
+      --bs-table-bg: #0f1d4a !important;
+    }
+
+    footer {
+      border-top: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(8, 15, 38, .4), rgba(8, 15, 38, .9));
+    }
+
+    /* Smooth anchors */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-4 fw-bold section-title">Conf.IA </h1>
+          <span class="display-6 section-title fw-medium" style="color:#ebebeb">As
+              falhas não avisam. <br>O Conf.IA sim.</span>
+          <div class="d-flex flex-wrap gap-4 mt-5">
+            <a href="#" class="btn btn-primary btn-lg"> Ative grátis</a>
+          </div>
+
+        </div>
+        <div class="col-lg-4">
+          <div class="hero-visual glow">
+            <img src="./icon.svg" alt="Conf.IA icon" class="hero-icon" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- O que é -->
+  <section id="sobre" class="py-2">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="card h-100 p-4 glow">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="bi bi-activity fs-3 text-info"></i>
+              <h3 class="m-0">O que é o <span style="color:var(--primary)">Conf.IA</span></h3>
+            </div>
+            <p class="muted mb-4">
+              O Conf.IA é a IA nativa do VMS em nuvem da Monuv que executa rondas automáticas para manutenção proativa do parque de câmeras:
+            </p>
+            <ul class="list-check list-unstyled">
+              <li><i class="bi bi-check2-circle me-2"></i>Identifica mudança de ângulo/posicionamento</li>
+              <li><i class="bi bi-check2-circle me-2"></i>Obstrução/tela preta/sujeira</li>
+              <li><i class="bi bi-check2-circle me-2"></i>Câmera offline (queda de conexão)</li>
+              <li><i class="bi bi-check2-circle me-2"></i>100% via software, sem hardware novo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="card h-100 p-4">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-broadcast-pin fs-4" style="color:var(--primary)"></i>
+                  <h5 class="m-0">Rondas inteligentes</h5>
+                </div>
+                <p class="muted mt-2">Rondas automáticas 2x/dia comparam as cenas e sinalizam mudanças para ação imediata.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100 p-4">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-lightning-charge fs-4" style="color:var(--accent)"></i>
+                  <h5 class="m-0">Dashboard de status</h5>
+                </div>
+                <p class="muted mt-2">Painel único para monitorar e priorizar manutenção por cliente/site/câmera e reduzir tempo de resposta.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100 p-4">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-cloud-check fs-4" style="color:var(--success)"></i>
+                  <h5 class="m-0">Monitore fácil na Nuvem</h5>
+                </div>
+                <p class="muted mt-2">Funciona com seu parque atual de câmeras, direto do VMS Monuv em nuvem — sem trocar câmeras ou DVRs ou módulos embarcados.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100 p-4">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-gear-wide-connected fs-4" style="color:var(--warm)"></i>
+                  <h5 class="m-0">Autosserviço</h5>
+                </div>
+                <p class="muted mt-2">Ative por cliente/grupo/câmera e defina política para novas câmeras entrarem automaticamente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos de uso -->
+  <section id="usos" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="section-title mt-3">Exemplos práticos</h2>
+        <p class="muted">Falhas passam despercebidas até a hora da evidência. O Conf.IA <strong>antecipa</strong> o problema e <strong>direciona a correção.</strong></p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 p-4 glow">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-camera-video fs-4" style="color:var(--primary)"></i>
+              <h5 class="m-0">Mudança de cena</h5>
+            </div>
+            <p class="muted mt-2">Rondas comparam cenas; se a câmera muda de ângulo, você é alertado para ajustar.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-cloud-rain-heavy fs-4" style="color:var(--accent)"></i>
+              <h5 class="m-0">Obstrução / Tela preta</h5>
+            </div>
+            <p class="muted mt-2">Folhagem, sujeira ou chuva cobrindo a lente? O Conf.IA detecta e envia alerta para limpeza/correção.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-wifi-off fs-4" style="color:var(--warm)"></i>
+              <h5 class="m-0">Offline / Erro permanente</h5>
+            </div>
+            <p class="muted mt-2">Quando a câmera perde conexão, você recebe alerta; se persistir 3+ dias, o status muda para Erro Permanente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA de ativação -->
+  <section id="ativar" class="py-5">
+    <div class="container">
+      <div class="card p-4 p-md-5 glow text-center">
+        <h3 class="mb-2">Deixe o Conf.IA trabalhar por você.</h3>
+        <p class="muted mb-4">Não espere a próxima falha.</p>
+        <div class="d-flex justify-content-center gap-2">
+          <a href="#" class="btn btn-primary btn-lg"> Ative o Conf.IA</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Mock de câmeras
+    const cams = [
+      { id: 1, nome: "Entrada Principal", local: "Super Center", active: true },
+      { id: 2, nome: "Docas 02", local: "ACME Logística", active: false },
+      { id: 3, nome: "Estacionamento Leste", local: "Universidade Alfa", active: true },
+      { id: 4, nome: "Cozinha", local: "Restaurante Dona Maria", active: false },
+      { id: 5, nome: "Caixas", local: "Super Center", active: true },
+      { id: 6, nome: "Portaria", local: "ACME Logística", active: false },
+    ];
+
+    const tbody = document.getElementById('tbodyCams');
+    const contador = document.getElementById('contador');
+    const checkAll = document.getElementById('checkAll');
+    const clienteSelect = document.getElementById('clienteSelect');
+
+    function render() {
+      const cliente = clienteSelect.value;
+      tbody.innerHTML = '';
+      let total = 0, ativas = 0;
+
+      cams.forEach(c => {
+        if (cliente !== 'all' && c.local !== cliente) return;
+
+        total++;
+        if (c.active) ativas++;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input class="form-check-input row-check" type="checkbox" data-id="${c.id}"></td>
+          <td class="fw-medium">${c.nome}</td>
+          <td class="text-white-50">${c.local}</td>
+          <td>
+            ${c.active
+            ? '<span class="badge text-bg-success-subtle border border-success-subtle"><i class="bi bi-check2-circle me-1"></i>Ativo</span>'
+            : '<span class="badge text-bg-secondary"><i class="bi bi-pause-circle me-1"></i>Inativo</span>'}
+          </td>
+          <td class="text-end">
+            <button class="btn btn-sm ${c.active ? 'btn-outline-light' : 'btn-primary'} toggle-btn" data-id="${c.id}">
+              <i class="bi ${c.active ? 'bi-toggle-off' : 'bi-toggle-on'} me-1"></i>${c.active ? 'Desativar' : 'Ativar'}
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      contador.textContent = `${ativas} de ${total} ativas`;
+      checkAll.checked = false;
+    }
+
+    // Eventos
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.toggle-btn')) {
+        const id = +e.target.closest('.toggle-btn').dataset.id;
+        const item = cams.find(x => x.id === id);
+        item.active = !item.active;
+        render();
+      }
+    });
+
+    checkAll.addEventListener('change', () => {
+      document.querySelectorAll('.row-check').forEach(ch => ch.checked = checkAll.checked);
+    });
+
+    document.getElementById('ativarSelecionadas').addEventListener('click', () => {
+      document.querySelectorAll('.row-check:checked').forEach(ch => {
+        const id = +ch.dataset.id;
+        const item = cams.find(x => x.id === id);
+        if (item) item.active = true;
+      });
+      render();
+    });
+
+    document.getElementById('desativarSelecionadas').addEventListener('click', () => {
+      document.querySelectorAll('.row-check:checked').forEach(ch => {
+        const id = +ch.dataset.id;
+        const item = cams.find(x => x.id === id);
+        if (item) item.active = false;
+      });
+      render();
+    });
+
+    clienteSelect.addEventListener('change', render);
+
+    // Resumo das regras
+    const autoNew = document.getElementById('autoNew');
+    const emailAlerts = document.getElementById('emailAlerts');
+    const pushAlerts = document.getElementById('pushAlerts');
+    const resumoRegras = document.getElementById('resumoRegras');
+
+    function updateResumo() {
+      const parts = [];
+      parts.push(autoNew.checked ? 'Novas câmeras entram automaticamente' : 'Novas câmeras não entram automaticamente');
+      if (emailAlerts.checked) parts.push('E-mail habilitado');
+      if (pushAlerts.checked) parts.push('Push habilitado');
+      resumoRegras.textContent = parts.join(' • ') + '.';
+    }
+    [autoNew, emailAlerts, pushAlerts].forEach(el => el.addEventListener('change', updateResumo));
+
+    // Primeira renderização
+    updateResumo();
+    render();
+  </script>
+</body>
+
+</html>
